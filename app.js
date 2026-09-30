@@ -1,11 +1,15 @@
 /**
  * SOUMI MUKHERJEE | JEWELRY & LIFESTYLE ACCESSORIES DESIGN PORTFOLIO
- * Dynamic Interactive Application Logic
+ * High-Motion Interactive 3D WebGL Studio & Fluid Animation Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPreloader();
+  initCustomCursor();
   initSparkleCanvas();
-  initNavbar();
+  initThreeJewelryStudio();
+  init3DCardTilt();
+  initNavbarAndMenu();
   initThemeToggle();
   initCollectionTabs();
   initFeatureToggles();
@@ -16,7 +20,113 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. AMBIENT SPARKLE PARTICLES CANVAS
+   1. PRELOADER ANIMATION SEQUENCE (0% -> 100% -> Cursive Greeting -> Reveal)
+   ========================================================================== */
+function initPreloader() {
+  const preloader = document.getElementById('preloader');
+  const counterEl = document.getElementById('preloaderCounter');
+  const arcProgress = document.getElementById('preloaderArc');
+  const spinnerWrap = document.getElementById('preloaderSpinnerWrap');
+  const greetingEl = document.getElementById('preloaderGreeting');
+  const body = document.body;
+
+  if (window.location.search.includes('nopreloader')) {
+    if (preloader) {
+      preloader.style.display = 'none';
+      preloader.classList.add('completed');
+    }
+    body.classList.remove('loading-state');
+    return;
+  }
+
+  let currentPercent = 0;
+  const targetPercent = 100;
+  const totalDuration = 1100; // ms
+  const intervalTime = 16;
+  const increment = targetPercent / (totalDuration / intervalTime);
+  const fullCircumference = 251.32; // 2 * PI * 40
+
+  const countTimer = setInterval(() => {
+    currentPercent += increment;
+    if (currentPercent >= 100) {
+      currentPercent = 100;
+      clearInterval(countTimer);
+      if (counterEl) counterEl.textContent = '100%';
+      if (arcProgress) arcProgress.style.strokeDashoffset = '0';
+
+      setTimeout(() => {
+        if (counterEl) counterEl.classList.add('hide');
+        if (spinnerWrap) spinnerWrap.classList.add('hide');
+        if (greetingEl) greetingEl.classList.add('show');
+
+        setTimeout(() => {
+          if (preloader) preloader.classList.add('completed');
+          body.classList.remove('loading-state');
+          setTimeout(() => {
+            if (preloader) preloader.style.display = 'none';
+          }, 800);
+        }, 600);
+      }, 250);
+    } else {
+      const displayVal = Math.floor(currentPercent);
+      if (counterEl) counterEl.textContent = `${displayVal}%`;
+      if (arcProgress) {
+        const offset = fullCircumference - (currentPercent / 100) * fullCircumference;
+        arcProgress.style.strokeDashoffset = offset;
+      }
+    }
+  }, intervalTime);
+}
+
+/* ==========================================================================
+   2. SMOOTH CUSTOM CURSOR WITH LERP INTERPOLATION
+   ========================================================================== */
+function initCustomCursor() {
+  const cursorDot = document.getElementById('customCursor');
+  const cursorFollower = document.getElementById('cursorFollower');
+  if (!cursorDot || !cursorFollower) return;
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let followerX = -100;
+  let followerY = -100;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = `${mouseX}px`;
+    cursorDot.style.top = `${mouseY}px`;
+  });
+
+  function renderCursor() {
+    followerX += (mouseX - followerX) * 0.16;
+    followerY += (mouseY - followerY) * 0.16;
+
+    cursorFollower.style.left = `${followerX}px`;
+    cursorFollower.style.top = `${followerY}px`;
+
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+
+  const hoverTargets = document.querySelectorAll(
+    'a, button, input, textarea, .piece-card, .sketch-card, .control-chip-btn, .tab-btn, .toggle-pill, .thumb-item, .studio-viewport-wrap'
+  );
+
+  hoverTargets.forEach((target) => {
+    target.addEventListener('mouseenter', () => {
+      cursorDot.classList.add('hovering');
+      cursorFollower.classList.add('hovering');
+    });
+    target.addEventListener('mouseleave', () => {
+      cursorDot.classList.remove('hovering');
+      cursorFollower.classList.remove('hovering');
+    });
+  });
+}
+
+/* ==========================================================================
+   3. AMBIENT SPARKLE PARTICLES
    ========================================================================== */
 function initSparkleCanvas() {
   const canvas = document.getElementById('sparkle-canvas');
@@ -31,7 +141,7 @@ function initSparkleCanvas() {
   });
 
   const sparkles = [];
-  const sparkleCount = window.innerWidth < 768 ? 25 : 55;
+  const sparkleCount = window.innerWidth < 768 ? 20 : 45;
 
   for (let i = 0; i < sparkleCount; i++) {
     sparkles.push({
@@ -64,12 +174,10 @@ function initSparkleCanvas() {
       ctx.shadowBlur = 8;
       ctx.shadowColor = s.color;
 
-      // Draw diamond/cross sparkle shape
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
       ctx.fill();
 
-      // Subtle 4-point cross highlight
       if (s.size > 1.8) {
         ctx.strokeStyle = s.color;
         ctx.lineWidth = 0.5;
@@ -91,14 +199,349 @@ function initSparkleCanvas() {
 }
 
 /* ==========================================================================
-   2. NAVBAR & SCROLL SPY
+   4. REAL-TIME 3D JEWELRY STUDIO (THREE.JS WEBGL VIEWPORT)
    ========================================================================== */
-function initNavbar() {
+function initThreeJewelryStudio() {
+  const container = document.getElementById('studio-viewport-wrap');
+  const canvas = document.getElementById('three-canvas');
+  if (!container || !canvas || typeof THREE === 'undefined') return;
+
+  // Scene setup
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    1000
+  );
+  camera.position.set(0, 0, 8.5);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true
+  });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+  scene.add(ambientLight);
+
+  const keyLight = new THREE.DirectionalLight(0xffeedd, 1.8);
+  keyLight.position.set(5, 8, 6);
+  scene.add(keyLight);
+
+  const fillLight = new THREE.PointLight(0x1dd391, 1.2, 50);
+  fillLight.position.set(-6, -4, 4);
+  scene.add(fillLight);
+
+  const rimLight = new THREE.DirectionalLight(0xd4af37, 2.0);
+  rimLight.position.set(0, -5, -4);
+  scene.add(rimLight);
+
+  // Jewelry Gem Group
+  const jewelGroup = new THREE.Group();
+  scene.add(jewelGroup);
+
+  // Preset Materials
+  const gemMaterials = {
+    emerald: new THREE.MeshPhysicalMaterial({
+      color: 0x0c784b,
+      emissive: 0x042416,
+      roughness: 0.05,
+      metalness: 0.1,
+      transmission: 0.88,
+      ior: 2.2,
+      thickness: 2.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      flatShading: true
+    }),
+    diamond: new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      emissive: 0x111122,
+      roughness: 0.02,
+      metalness: 0.05,
+      transmission: 0.95,
+      ior: 2.42,
+      thickness: 3.0,
+      clearcoat: 1.0,
+      flatShading: true
+    }),
+    ruby: new THREE.MeshPhysicalMaterial({
+      color: 0xb5122b,
+      emissive: 0x3d030c,
+      roughness: 0.06,
+      metalness: 0.1,
+      transmission: 0.85,
+      ior: 2.3,
+      thickness: 2.5,
+      clearcoat: 1.0,
+      flatShading: true
+    })
+  };
+
+  const goldCageMaterial = new THREE.MeshStandardMaterial({
+    color: 0xd4af37,
+    metalness: 0.92,
+    roughness: 0.18,
+    wireframe: false
+  });
+
+  const wireCageMaterial = new THREE.MeshBasicMaterial({
+    color: 0xf3e5ab,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.35
+  });
+
+  // Gem Geometries
+  function createEmeraldGeometry() {
+    // Faceted Octagonal / Cushion Box
+    return new THREE.CylinderGeometry(2.1, 1.4, 2.8, 8, 3);
+  }
+
+  function createDiamondGeometry() {
+    // Brilliant Diamond Double Cone
+    return new THREE.OctahedronGeometry(2.2, 2);
+  }
+
+  function createCabochonGeometry() {
+    // Sacred Lotus Crown Cabochon
+    return new THREE.DodecahedronGeometry(2.1, 1);
+  }
+
+  let currentMesh = null;
+  let currentWire = null;
+  let currentCage = null;
+
+  function buildJewel(cutType, matType) {
+    if (currentMesh) jewelGroup.remove(currentMesh);
+    if (currentWire) jewelGroup.remove(currentWire);
+    if (currentCage) jewelGroup.remove(currentCage);
+
+    let geom;
+    if (cutType === 'diamond') geom = createDiamondGeometry();
+    else if (cutType === 'cabochon') geom = createCabochonGeometry();
+    else geom = createEmeraldGeometry();
+
+    const mat = gemMaterials[matType] || gemMaterials.emerald;
+    currentMesh = new THREE.Mesh(geom, mat);
+    jewelGroup.add(currentMesh);
+
+    // Subtle faceted wireframe accent
+    currentWire = new THREE.Mesh(geom, wireCageMaterial);
+    currentWire.scale.set(1.002, 1.002, 1.002);
+    jewelGroup.add(currentWire);
+
+    // 18K Gold Outer Setting Ring / Prongs
+    const ringGeom = new THREE.TorusGeometry(2.4, 0.08, 16, 64);
+    currentCage = new THREE.Mesh(ringGeom, goldCageMaterial);
+    currentCage.rotation.x = Math.PI / 2;
+    jewelGroup.add(currentCage);
+  }
+
+  // Initial build: Emerald Cut & Emerald Gem
+  buildJewel('emerald', 'emerald');
+
+  // Floating Diamond Dust Particle Constellation
+  const dustCount = 80;
+  const dustGeom = new THREE.BufferGeometry();
+  const dustPos = new Float32Array(dustCount * 3);
+
+  for (let i = 0; i < dustCount * 3; i += 3) {
+    dustPos[i] = (Math.random() - 0.5) * 12;
+    dustPos[i + 1] = (Math.random() - 0.5) * 12;
+    dustPos[i + 2] = (Math.random() - 0.5) * 12;
+  }
+  dustGeom.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+
+  const dustMat = new THREE.PointsMaterial({
+    color: 0xf3e5ab,
+    size: 0.12,
+    transparent: true,
+    opacity: 0.6
+  });
+  const dustParticles = new THREE.Points(dustGeom, dustMat);
+  scene.add(dustParticles);
+
+  // Mouse Orbit Interaction
+  let isDragging = false;
+  let prevMousePos = { x: 0, y: 0 };
+  let targetRotation = { x: 0.35, y: 0.5 };
+  let mouseScreenX = 0;
+  let mouseScreenY = 0;
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    prevMousePos = { x: e.clientX, y: e.clientY };
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    mouseScreenX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseScreenY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+    // Reposition key light based on cursor for real reflection play
+    keyLight.position.x = mouseScreenX * 8 + 3;
+    keyLight.position.y = mouseScreenY * 8 + 4;
+
+    if (isDragging) {
+      const deltaX = e.clientX - prevMousePos.x;
+      const deltaY = e.clientY - prevMousePos.y;
+      targetRotation.y += deltaX * 0.01;
+      targetRotation.x += deltaY * 0.01;
+      prevMousePos = { x: e.clientX, y: e.clientY };
+    }
+  });
+
+  // Touch support for mobile
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if (isDragging && e.touches.length === 1) {
+      const deltaX = e.touches[0].clientX - prevMousePos.x;
+      const deltaY = e.touches[0].clientY - prevMousePos.y;
+      targetRotation.y += deltaX * 0.01;
+      targetRotation.x += deltaY * 0.01;
+      prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  });
+
+  // Resize handler
+  window.addEventListener('resize', () => {
+    if (!container) return;
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+
+  // Scroll rotation reactive effect
+  window.addEventListener('scroll', () => {
+    targetRotation.y += 0.02;
+  });
+
+  // Render loop
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Continuous subtle auto-rotation if not dragging
+    if (!isDragging) {
+      targetRotation.y += 0.005;
+    }
+
+    // Smooth lerp rotation
+    jewelGroup.rotation.y += (targetRotation.y - jewelGroup.rotation.y) * 0.08;
+    jewelGroup.rotation.x += (targetRotation.x - jewelGroup.rotation.x) * 0.08;
+
+    // Subtle breathing float
+    jewelGroup.position.y = Math.sin(Date.now() * 0.0018) * 0.22;
+
+    // Rotate dust
+    dustParticles.rotation.y += 0.001;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Studio UI Controls
+  let activeCut = 'emerald';
+  let activeMat = 'emerald';
+
+  const cutBtns = document.querySelectorAll('[data-3d-cut]');
+  const matBtns = document.querySelectorAll('[data-3d-mat]');
+
+  cutBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      cutBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCut = btn.dataset['3dCut'];
+      buildJewel(activeCut, activeMat);
+    });
+  });
+
+  matBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      matBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeMat = btn.dataset['3dMat'];
+      buildJewel(activeCut, activeMat);
+    });
+  });
+}
+
+/* ==========================================================================
+   5. INTERACTIVE 3D CARD TILT WITH SPECULAR GLARE
+   ========================================================================== */
+function init3DCardTilt() {
+  const tiltCards = document.querySelectorAll('.tilt-card');
+
+  tiltCards.forEach((card) => {
+    // Add specular glare element if not present
+    let glare = card.querySelector('.card-glare');
+    if (!glare) {
+      glare = document.createElement('div');
+      glare.className = 'card-glare';
+      card.appendChild(glare);
+    }
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -9; // Max 9 deg
+      const rotateY = ((x - centerX) / centerX) * 9;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+      // Update glare position
+      const glareX = (x / rect.width) * 100;
+      const glareY = (y / rect.height) * 100;
+      glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.22) 0%, transparent 60%)`;
+      glare.style.opacity = '1';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      glare.style.opacity = '0';
+    });
+
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'none';
+    });
+  });
+}
+
+/* ==========================================================================
+   6. NAVBAR & FULLSCREEN OVERLAY MENU
+   ========================================================================== */
+function initNavbarAndMenu() {
   const navbar = document.querySelector('.navbar');
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section[id]');
-  const navToggle = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const menuCloseBtn = document.getElementById('menuCloseBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuLinks = document.querySelectorAll('.menu-link');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
@@ -107,7 +550,6 @@ function initNavbar() {
       navbar.classList.remove('scrolled');
     }
 
-    // Scroll spy
     let currentId = '';
     sections.forEach((sec) => {
       const top = sec.offsetTop - 120;
@@ -125,22 +567,30 @@ function initNavbar() {
     });
   });
 
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', navMenu.classList.contains('open'));
-    });
-
-    navLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-      });
-    });
+  function openMenu() {
+    if (menuOverlay) {
+      menuOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
   }
+
+  function closeMenu() {
+    if (menuOverlay) {
+      menuOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMenu);
+  if (menuCloseBtn) menuCloseBtn.addEventListener('click', closeMenu);
+
+  menuLinks.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
 }
 
 /* ==========================================================================
-   3. THEME TOGGLE (Dark Luxury / Light Pearl)
+   7. THEME TOGGLE
    ========================================================================== */
 function initThemeToggle() {
   const themeBtn = document.getElementById('theme-toggle-btn');
@@ -166,7 +616,7 @@ function initThemeToggle() {
 }
 
 /* ==========================================================================
-   4. COLLECTION TABS
+   8. COLLECTION TABS
    ========================================================================== */
 function initCollectionTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -191,10 +641,9 @@ function initCollectionTabs() {
 }
 
 /* ==========================================================================
-   5. INTERACTIVE FEATURE TOGGLES (VersaForma & Rajdwara Modularity)
+   9. INTERACTIVE FEATURE TOGGLES
    ========================================================================== */
 function initFeatureToggles() {
-  // VersaForma Transformation
   const vfToggles = document.querySelectorAll('.vf-toggle-btn');
   const vfVisual = document.getElementById('vf-feature-img');
   const vfDesc = document.getElementById('vf-feature-desc');
@@ -233,7 +682,6 @@ function initFeatureToggles() {
     });
   });
 
-  // Rajdwara Kalangi System
   const rjToggles = document.querySelectorAll('.rj-toggle-btn');
   const rjVisual = document.getElementById('rj-feature-img');
   const rjDesc = document.getElementById('rj-feature-desc');
@@ -279,7 +727,7 @@ function initFeatureToggles() {
 }
 
 /* ==========================================================================
-   6. FULLSCREEN JURY SPREAD VIEWER / FLIPBOOK
+   10. FULLSCREEN JURY SPREAD VIEWER
    ========================================================================== */
 function initSpreadViewer() {
   const spreadImg = document.getElementById('spread-current-img');
@@ -295,7 +743,6 @@ function initSpreadViewer() {
   const totalPages = 21;
   let currentPage = 1;
 
-  // Metadata titles for spreads
   const pageTitles = {
     1: 'Cover: Portfolio 2026',
     2: 'Designer Profile & Statement',
@@ -320,7 +767,6 @@ function initSpreadViewer() {
     21: "Let's Connect & Jury Evaluation"
   };
 
-  // Generate thumbnail strip
   for (let i = 1; i <= totalPages; i++) {
     const pad = i.toString().padStart(2, '0');
     const thumb = document.createElement('div');
@@ -353,7 +799,6 @@ function initSpreadViewer() {
       spreadImg.style.opacity = '1';
     }, 150);
 
-    // Update thumbnail highlights
     const allThumbs = thumbStrip.querySelectorAll('.thumb-item');
     allThumbs.forEach((t) => {
       if (parseInt(t.dataset.page) === currentPage) {
@@ -368,13 +813,11 @@ function initSpreadViewer() {
   if (prevBtn) prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
   if (nextBtn) nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
 
-  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') goToPage(currentPage - 1);
     if (e.key === 'ArrowRight') goToPage(currentPage + 1);
   });
 
-  // Zoom click on main spread
   if (zoomBtn) {
     zoomBtn.addEventListener('click', () => {
       const pad = currentPage.toString().padStart(2, '0');
@@ -405,13 +848,12 @@ function initSpreadViewer() {
 }
 
 /* ==========================================================================
-   7. PIECE DETAIL MODAL LIGHTBOX
+   11. PIECE DETAIL MODAL LIGHTBOX
    ========================================================================== */
 function initPieceModals() {
   const modal = document.getElementById('piece-modal');
   const closeBtn = document.getElementById('modal-close-btn');
 
-  // Attach click listener to all piece cards and sketch cards
   document.querySelectorAll('[data-inspect]').forEach((el) => {
     el.addEventListener('click', () => {
       try {
@@ -423,10 +865,7 @@ function initPieceModals() {
     });
   });
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
-
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
@@ -473,7 +912,7 @@ function closeModal() {
 }
 
 /* ==========================================================================
-   8. CONTACT COPY TO CLIPBOARD
+   12. CONTACT COPY & FORM SUBMISSION
    ========================================================================== */
 function initContactCopy() {
   document.querySelectorAll('.copy-trigger').forEach((btn) => {
@@ -499,7 +938,7 @@ function initContactCopy() {
       const submitBtn = inquiryForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Message Sent Successfully!';
-      submitBtn.style.background = '#0e5a40';
+      submitBtn.style.background = '#0e6b4c';
       submitBtn.style.color = '#fff';
       setTimeout(() => {
         submitBtn.textContent = originalText;
@@ -512,7 +951,7 @@ function initContactCopy() {
 }
 
 /* ==========================================================================
-   9. SMOOTH SCROLLING
+   13. SMOOTH SCROLLING
    ========================================================================== */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

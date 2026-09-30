@@ -4,40 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Soumi Mukherjee | Jewelry & Lifestyle Accessories Designer | NIFT Kolkata</title>
-  <meta name="description" content="Portfolio of Soumi Mukherjee - Fashion & Lifestyle Accessories Designer specializing in Jewelry Design. B.Des Final Year, NIFT Kolkata. Explore VersaForma, Rajdwara, Antarjyoti & NaadRaga collections.">
-  <meta name="keywords" content="Soumi Mukherjee, Jewelry Design, NIFT Kolkata, Fashion Lifestyle Accessories, FLA, VersaForma, Rajdwara, Antarjyoti, High Jewelry, Cad, MatrixGold, Rhino">
+  <meta name="description" content="Portfolio of Soumi Mukherjee - Fashion & Lifestyle Accessories Designer specializing in Jewelry Design. B.Des Final Year, NIFT Kolkata. Explore 3D WebGL studio, VersaForma, Rajdwara, Antarjyoti & NaadRaga collections.">
+  <meta name="keywords" content="Soumi Mukherjee, Jewelry Design, NIFT Kolkata, Fashion Lifestyle Accessories, FLA, VersaForma, Rajdwara, Antarjyoti, High Jewelry, 3D WebGL, Three.js">
   <meta name="author" content="Soumi Mukherjee">
   
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="Soumi Mukherjee | Jewelry & Lifestyle Accessories Design Portfolio">
-  <meta property="og:description" content="NIFT Kolkata B.Des Jewelry Designer. Explore modular high jewelry, Rajasthani royal kalangi, and sacred geometry collections.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Soumi Mukherjee | Fine Jewelry & Lifestyle Accessories Portfolio">
+  <meta property="og:description" content="NIFT Kolkata B.Des Jewelry Designer. Interactive 3D WebGL jewelry studio, modular royal ornaments, and sacred geometry collections.">
   <meta property="og:image" content="assets/showcase/raj_tilak_kalangi_crop.webp">
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23781726'/><polygon points='50,15 80,50 50,85 20,50' fill='%23d4af37'/><circle cx='50' cy='50' r='14' fill='%230e5a40'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23781726'/><polygon points='50,15 80,50 50,85 20,50' fill='%23d4af37'/><circle cx='50' cy='50' r='14' fill='%230e6b4c'/></svg>">
 
   <!-- Google Fonts Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Custom Stylesheet -->
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="loading-state">
 
-  <!-- Ambient Luxury Glow Background -->
+  <!-- 1. PRELOADER ANIMATION (Matching Ritam Roy's Snappy Circular Sequence) -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <div class="preloader-spinner-wrap" id="preloaderSpinnerWrap">
+        <svg class="preloader-arc" width="90" height="90" viewBox="0 0 90 90">
+          <circle class="preloader-arc-bg" cx="45" cy="45" r="40" stroke-width="2.5" fill="none" />
+          <circle class="preloader-arc-progress" id="preloaderArc" cx="45" cy="45" r="40" stroke-width="2.5" fill="none" />
+        </svg>
+        <span class="preloader-counter" id="preloaderCounter">0%</span>
+      </div>
+      <div class="preloader-greeting" id="preloaderGreeting">Soumi Mukherjee</div>
+    </div>
+  </div>
+
+  <!-- 2. FLUID CUSTOM CURSOR -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+
+  <!-- 3. AMBIENT BACKGROUND GLOW & SPARKLES -->
   <div class="ambient-bg" aria-hidden="true">
     <div class="ambient-blob blob-1"></div>
     <div class="ambient-blob blob-2"></div>
     <div class="ambient-blob blob-3"></div>
   </div>
-
-  <!-- Dynamic Sparkle Facet Particles -->
   <canvas id="sparkle-canvas" aria-hidden="true"></canvas>
 
-  <!-- Sticky Luxury Navigation Bar -->
+  <!-- 4. FULLSCREEN STAGGERED OVERLAY MENU -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close Navigation Menu">&times;</button>
+    <div class="menu-content">
+      <ul class="menu-nav">
+        <li><a href="#home" class="menu-link">01. HOME</a></li>
+        <li><a href="#studio-3d" class="menu-link">02. 3D JEWELRY STUDIO</a></li>
+        <li><a href="#collections" class="menu-link">03. COLLECTIONS</a></li>
+        <li><a href="#sketches" class="menu-link">04. HAND SKETCHES</a></li>
+        <li><a href="#spread-viewer" class="menu-link">05. JURY SPREADS</a></li>
+        <li><a href="#about" class="menu-link">06. RESUME & ABOUT</a></li>
+        <li><a href="#contact" class="menu-link">07. GET IN TOUCH</a></li>
+      </ul>
+      <div style="margin-top: 2rem;">
+        <a href="Soumi_Mukherjee_Resume.pdf" class="btn btn-primary" download>Download Official Resume PDF ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. STICKY LUXURY NAVIGATION BAR -->
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <a href="#home" class="nav-brand">
@@ -51,8 +86,9 @@
       <nav>
         <ul class="nav-menu" id="nav-menu">
           <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#studio-3d" class="nav-link">3D Studio</a></li>
           <li><a href="#collections" class="nav-link">Collections</a></li>
-          <li><a href="#sketches" class="nav-link">Hand Sketches</a></li>
+          <li><a href="#sketches" class="nav-link">Sketches</a></li>
           <li><a href="#spread-viewer" class="nav-link">Jury Spreads</a></li>
           <li><a href="#about" class="nav-link">About & Resume</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -67,14 +103,14 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           Resume PDF
         </a>
-        <button class="btn-icon nav-toggle" aria-label="Open Navigation Menu">
+        <button class="btn-icon" id="hamburger-btn" aria-label="Open Fullscreen Menu" title="Menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- POV Reference Banner (Matching the Instagram Reel POV Style) -->
+  <!-- POV REFERENCE BANNER (Matching the Video's Kinetic Style) -->
   <div class="pov-bar-wrapper">
     <div class="pov-banner">
       <span class="pov-dot"></span>
@@ -86,12 +122,22 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero-section" id="home">
+      <!-- Rotating Royal Seal Badge (Inspired by Ritam Roy's Rotating Badge) -->
+      <div class="rotating-seal-wrap" aria-hidden="true">
+        <svg class="rotating-seal-svg" viewBox="0 0 120 120">
+          <path id="sealPath" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
+          <text>
+            <textPath href="#sealPath" startOffset="0%">• NIFT 2026 • JEWELRY DESIGNER • 7TH JURY •</textPath>
+          </text>
+        </svg>
+        <span class="seal-center-gem">💎</span>
+      </div>
+
       <div class="container hero-grid">
         <!-- Left: Sticker Cutout Avatar of Soumi with White Contour -->
         <div class="hero-avatar-card">
           <div class="avatar-ambient-halo"></div>
           
-          <!-- Floating Jewelry Context Badges -->
           <div class="floating-badge badge-top-left">
             <span class="badge-icon">👑</span>
             <div class="badge-meta">
@@ -135,7 +181,7 @@
           </p>
 
           <p class="hero-description">
-            “Crafting stories through form, detail, and design.” I specialize in conceptualizing, rendering, and engineering jewelry that balances aesthetic elegance with thoughtful functionality — translating heritage architecture, sacred geometry, and cultural narratives into contemporary, market-relevant luxury adornments.
+            “Crafting stories through form, detail, and design.” I specialize in conceptualizing, 3D rendering, and engineering jewelry that balances aesthetic elegance with thoughtful functionality — translating heritage architecture, sacred geometry, and cultural narratives into contemporary, market-relevant luxury adornments.
           </p>
 
           <!-- Design Software & Discipline Tags -->
@@ -151,16 +197,16 @@
 
           <!-- CTA Buttons -->
           <div class="hero-cta">
-            <a href="#collections" class="btn btn-primary">
+            <a href="#studio-3d" class="btn btn-primary">
+              <span>Interactive 3D Studio</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </a>
+            <a href="#collections" class="btn btn-emerald">
               <span>Explore 4 Collections</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </a>
-            <a href="#spread-viewer" class="btn btn-emerald">
-              <span>View Physical Jury Spreads</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-            </a>
-            <a href="#about" class="btn btn-secondary">
-              <span>About & Resume</span>
+            <a href="#spread-viewer" class="btn btn-secondary">
+              <span>Jury Spreads (21)</span>
             </a>
           </div>
 
@@ -187,8 +233,108 @@
       </div>
     </section>
 
-    <!-- JURY & PLACEMENT QUICK DOWNLOAD BAR -->
-    <div class="container">
+    <!-- INFINITE KINETIC MARQUEE 1 -->
+    <div class="marquee-ribbon" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>SOUMI MUKHERJEE</span> <span class="separator">◆</span>
+          <span>JEWELRY & LIFESTYLE ACCESSORIES</span> <span class="separator">◆</span>
+          <span>NIFT KOLKATA 2026</span> <span class="separator">◆</span>
+          <span>7TH JURY SELECTION</span> <span class="separator">◆</span>
+          <span>VERSAFORMA</span> <span class="separator">◆</span>
+          <span>RAJDWARA</span> <span class="separator">◆</span>
+          <span>ANTARJYOTI</span> <span class="separator">◆</span>
+          <span>NAADRAGA</span> <span class="separator">◆</span>
+        </div>
+        <div class="marquee-content">
+          <span>SOUMI MUKHERJEE</span> <span class="separator">◆</span>
+          <span>JEWELRY & LIFESTYLE ACCESSORIES</span> <span class="separator">◆</span>
+          <span>NIFT KOLKATA 2026</span> <span class="separator">◆</span>
+          <span>7TH JURY SELECTION</span> <span class="separator">◆</span>
+          <span>VERSAFORMA</span> <span class="separator">◆</span>
+          <span>RAJDWARA</span> <span class="separator">◆</span>
+          <span>ANTARJYOTI</span> <span class="separator">◆</span>
+          <span>NAADRAGA</span> <span class="separator">◆</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D INTERACTIVE JEWELRY STUDIO (THREE.JS WEBGL) -->
+    <section class="studio-3d-section" id="studio-3d">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-pretitle">Real-Time WebGL 3D Studio</span>
+          <h2 class="section-title">Interactive 3D Jewelry Inspector</h2>
+          <p class="section-subtitle">
+            Drag to rotate 360° in real-time 3D space. Customize faceted gemstone cuts, reflective metals, and optical refraction.
+          </p>
+        </div>
+
+        <div class="studio-3d-card">
+          <!-- 3D Canvas Viewport -->
+          <div class="studio-viewport-wrap" id="studio-viewport-wrap">
+            <canvas id="three-canvas"></canvas>
+            <div class="viewport-overlay-hint">
+              <span>✦ Drag mouse to rotate 360° • Dynamic Light Tracking</span>
+            </div>
+          </div>
+
+          <!-- Studio Customization Controls -->
+          <div class="studio-controls-panel">
+            <div>
+              <h3 class="studio-heading">Faceted Gemstone <span>& Setting Studio</span></h3>
+              <p class="studio-desc">
+                Engineered with real-time physical transmission, dispersion, and 18K yellow gold prong cages matching Soumi’s CAD blueprints.
+              </p>
+            </div>
+
+            <!-- Gem Cut Selector -->
+            <div>
+              <span class="control-group-title">1. Select Gemstone Cut</span>
+              <div class="control-btn-grid">
+                <button class="control-chip-btn active" data-3d-cut="emerald">
+                  <span>Emerald Cut</span>
+                </button>
+                <button class="control-chip-btn" data-3d-cut="diamond">
+                  <span>Solitaire Diamond</span>
+                </button>
+                <button class="control-chip-btn" data-3d-cut="cabochon">
+                  <span>Lotus Crown</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Material & Gemstone Selector -->
+            <div>
+              <span class="control-group-title">2. Select Precious Material</span>
+              <div class="control-btn-grid">
+                <button class="control-chip-btn active" data-3d-mat="emerald">
+                  <span>18K Gold & Emerald</span>
+                </button>
+                <button class="control-chip-btn" data-3d-mat="diamond">
+                  <span>Platinum & Diamond</span>
+                </button>
+                <button class="control-chip-btn" data-3d-mat="ruby">
+                  <span>Rose Gold & Ruby</span>
+                </button>
+              </div>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <span style="font-size: 0.8rem; color: var(--text-dim); display: block; margin-bottom: 0.5rem;">
+                Crafted for Rajdwara Kalangi & VersaForma Modular Settings
+              </span>
+              <a href="#collections" class="btn btn-secondary btn-sm" style="width: 100%;">
+                View Collections in Detail ↓
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JURY DOWNLOAD BANNER -->
+    <div class="container" style="padding-top: 4rem;">
       <div class="jury-bar-card">
         <div class="jury-meta">
           <h3>🎓 NIFT Final Jury & Industry Placement Documents</h3>
@@ -245,8 +391,7 @@
              COLLECTION 01: VERSAFORMA
              ========================================== -->
         <div class="collection-panel active" id="panel-versaforma">
-          <!-- Lead Card -->
-          <div class="collection-lead-card">
+          <div class="collection-lead-card tilt-card">
             <div class="collection-lead-media">
               <img src="assets/pages_web/page_04.webp" alt="VersaForma Collection Overview" loading="lazy">
               <div class="collection-lead-overlay">
@@ -287,7 +432,7 @@
                 <img id="vf-feature-img" src="assets/showcase/versaforma_model_crop.webp" alt="VersaForma Interactive Feature Visual">
               </div>
               <div class="feature-step-list">
-                <p id="vf-feature-desc" style="font-size: 0.96rem; color: var(--color-gold-bright); margin-bottom: 1rem;">
+                <p id="vf-feature-desc" style="font-size: 0.98rem; color: var(--gold-bright); margin-bottom: 1rem;">
                   <strong>Full Royal Statement Necklace</strong>: Complete regal Victorian composition with central drop pendant and geometric filigree links articulated to drape smoothly over the collarbone.
                 </p>
                 <div class="feature-step-item">
@@ -315,10 +460,9 @@
             </div>
           </div>
 
-          <!-- Bento Grid of VersaForma Pieces -->
+          <!-- Bento Grid of VersaForma Pieces with 3D Tilt Cards -->
           <div class="pieces-bento-grid">
-            <!-- Piece 1: Convertible Necklace -->
-            <div class="piece-card bento-col-7" data-inspect='{
+            <div class="piece-card bento-col-7 tilt-card" data-inspect='{
               "title": "Convertible Royal Necklace",
               "category": "VersaForma • Collection 01",
               "desc": "Victorian filigree framework articulated with geometric rectangular and triangular light-toned stones. Central pendant detaches seamlessly into a Maang Tikka for bride and celebratory occasions.",
@@ -340,8 +484,7 @@
               </div>
             </div>
 
-            <!-- Piece 2: Cluster Ring -->
-            <div class="piece-card bento-col-5" data-inspect='{
+            <div class="piece-card bento-col-5 tilt-card" data-inspect='{
               "title": "Geometric Cluster Ring",
               "category": "VersaForma • Collection 01",
               "desc": "Contemporary cluster-set ring featuring central emerald-cut diamond framed by dual triangular side-stones and filigree crown setting.",
@@ -363,8 +506,7 @@
               </div>
             </div>
 
-            <!-- Piece 3: Maang Tikka & Earrings -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Maang Tikka & Stud ➔ Drop Earrings",
               "category": "VersaForma • Collection 01",
               "desc": "3-tier linked drop earrings (6.5 cm total length) detachable into a daytime stud, paired with the regal forehead Maang Tikka.",
@@ -386,8 +528,7 @@
               </div>
             </div>
 
-            <!-- Piece 4: Slave Bracelet (Hathphool) -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Articulated Slave Bracelet (Hathphool)",
               "category": "VersaForma • Collection 01",
               "desc": "Wrist-to-finger articulated adornment featuring a top bar bracelet, center drop chain, and interconnected geometric cluster ring.",
@@ -415,8 +556,7 @@
              COLLECTION 02: RAJDWARA
              ========================================== -->
         <div class="collection-panel active" id="panel-rajdwara">
-          <!-- Lead Card -->
-          <div class="collection-lead-card">
+          <div class="collection-lead-card tilt-card">
             <div class="collection-lead-media">
               <img src="assets/pages_web/page_09.webp" alt="Rajdwara Collection Overview" loading="lazy">
               <div class="collection-lead-overlay">
@@ -458,7 +598,7 @@
                 <img id="rj-feature-img" src="assets/showcase/raj_tilak_kalangi_crop.webp" alt="Rajdwara Interactive Feature Visual">
               </div>
               <div class="feature-step-list">
-                <p id="rj-feature-desc" style="font-size: 0.96rem; color: var(--color-gold-bright); margin-bottom: 1rem;">
+                <p id="rj-feature-desc" style="font-size: 0.98rem; color: var(--gold-bright); margin-bottom: 1rem;">
                   <strong>Complete Raj Tilak Kalangi System</strong>: The master royal Rajput head adornment featuring a structured upward architectural flow, massive central emerald, and the integrated rail slot docking system.
                 </p>
                 <div class="feature-step-item">
@@ -486,10 +626,9 @@
             </div>
           </div>
 
-          <!-- Bento Grid of Rajdwara Pieces -->
+          <!-- Bento Grid of Rajdwara Pieces with 3D Tilt -->
           <div class="pieces-bento-grid">
-            <!-- Piece 1: Raj Tilak Kalangi -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Raj Tilak Kalangi (Master Royal Crest)",
               "category": "Rajdwara • Collection 02",
               "desc": "Inspired by Rajput royal head crests, echoing the vertical rise of palace domes. Anchored by an 18 × 12 mm rectangular emerald, surrounded by pear-shaped polki motifs and rail-slot system.",
@@ -511,8 +650,7 @@
               </div>
             </div>
 
-            <!-- Piece 2: Pravesh Stambh -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Pravesh Stambh Detachable Brooch",
               "category": "Rajdwara • Collection 02",
               "desc": "Emerald accents and diamond detailing enhance verticality, symbolizing gateway strength and स्वागत (welcome). Worn on sherwani lapels or Kalangi.",
@@ -534,8 +672,7 @@
               </div>
             </div>
 
-            <!-- Piece 3: Megh Toran -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Megh Toran Brooch",
               "category": "Rajdwara • Collection 02",
               "desc": "Balancing architectural solidity with festive grandeur, inspired by palace toran gateways with suspended pear-shaped emerald drops.",
@@ -557,8 +694,7 @@
               </div>
             </div>
 
-            <!-- Piece 4: Surya Pol -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Surya Pol Brooch",
               "category": "Rajdwara • Collection 02",
               "desc": "Inspired by Jaipur's sun-facing Surya Pol gateway, emphasizing radiant axial symmetry, carved enamel details, and polki diamonds.",
@@ -580,83 +716,13 @@
               </div>
             </div>
           </div>
-
-          <!-- Technical & Material Specifications Table -->
-          <div class="specs-table-card">
-            <h4 class="table-header-title">
-              <span>📐 Rajdwara Design & Material Technical Specification Matrix</span>
-            </h4>
-            <table class="tech-table">
-              <thead>
-                <tr>
-                  <th>Parameter</th>
-                  <th>Brooch 01 (Pravesh)</th>
-                  <th>Brooch 02 (Megh Toran)</th>
-                  <th>Brooch 03 (Surya Pol)</th>
-                  <th>Kalangi (Base Unit)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Product Type</strong></td>
-                  <td>Detachable Brooch</td>
-                  <td>Detachable Brooch</td>
-                  <td>Detachable Brooch</td>
-                  <td>Modular Kalangi</td>
-                </tr>
-                <tr>
-                  <td><strong>Inspiration</strong></td>
-                  <td>Architectural Arch</td>
-                  <td>Dome & Jharokha</td>
-                  <td>Fort Facade Lines</td>
-                  <td>Royal Rajput Crest</td>
-                </tr>
-                <tr>
-                  <td><strong>Dimensions</strong></td>
-                  <td>70 × 30 mm</td>
-                  <td>65 × 50 mm</td>
-                  <td>60 × 35 mm</td>
-                  <td>110 × 40 mm</td>
-                </tr>
-                <tr>
-                  <td><strong>Metal & Finish</strong></td>
-                  <td>18K Yellow Gold (High Polish)</td>
-                  <td>18K Gold (Textured Polish)</td>
-                  <td>18K Gold (Mirror Polish)</td>
-                  <td>18K Gold (Filigree + Polish)</td>
-                </tr>
-                <tr>
-                  <td><strong>Primary Stone</strong></td>
-                  <td>Emerald (12 × 8 mm Pear)</td>
-                  <td>Emerald (10–12 mm Oval)</td>
-                  <td>Emerald (14 × 10 mm Cut)</td>
-                  <td>Emerald (18 × 12 mm Cut)</td>
-                </tr>
-                <tr>
-                  <td><strong>Mechanism</strong></td>
-                  <td>Hook Attachment</td>
-                  <td>Sliding Hook</td>
-                  <td>Lock Hook</td>
-                  <td>Rail Slot System</td>
-                </tr>
-                <tr>
-                  <td><strong>Approx. Weight</strong></td>
-                  <td>14–18 g</td>
-                  <td>15–20 g</td>
-                  <td>16–22 g</td>
-                  <td>28–35 g</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
 
         <!-- ==========================================
              COLLECTION 03: ANTARJYOTI
              ========================================== -->
         <div class="collection-panel active" id="panel-antarjyoti">
-          <!-- Lead Card -->
-          <div class="collection-lead-card">
+          <div class="collection-lead-card tilt-card">
             <div class="collection-lead-media">
               <img src="assets/pages_web/page_14.webp" alt="Antarjyoti Collection Overview" loading="lazy">
               <div class="collection-lead-overlay">
@@ -671,7 +737,7 @@
                 Antarjyoti is a collection inspired by the profound journey of self-awakening and the alignment of the seven chakras. In a world of constant motion, this collection serves as a visual anchor representing the "Inner Light". Drawing heavily from the Sacred Geometry of the Lotus and radial expansion of energy from a singular point of consciousness.
               </p>
               <div class="collection-lead-specs">
-                <span class="spec-pill"><strong>Chakra Alignment:</strong> Sahasrara, Ajna, Vishuddha, Anahata, Manipura, Svadhishthana, Muladhara</span>
+                <span class="spec-pill"><strong>Chakra Alignment:</strong> Sahasrara to Muladhara</span>
                 <span class="spec-pill"><strong>Stones:</strong> Multi-color Gemstones & GH-VS Diamonds</span>
                 <span class="spec-pill"><strong>Craft:</strong> Intricate Layering, Filigree & Natural Pearls</span>
                 <span class="spec-pill"><strong>Adornment:</strong> High-Jewelry Bangles with Alta Mudra Modeling</span>
@@ -679,10 +745,9 @@
             </div>
           </div>
 
-          <!-- Bento Grid of Antarjyoti Pieces -->
+          <!-- Bento Grid of Antarjyoti Pieces with 3D Tilt -->
           <div class="pieces-bento-grid">
-            <!-- Piece 1: Alta Mudra Bangles Showcase -->
-            <div class="piece-card bento-col-8" data-inspect='{
+            <div class="piece-card bento-col-8 tilt-card" data-inspect='{
               "title": "Sahasrasa & Padma Bangles Mudra Showcase",
               "category": "Antarjyoti • Collection 03",
               "desc": "Modeled with traditional alta-painted mudra hands, evoking classical Indian sacred aesthetics and the radial energy expansion of the seven chakras.",
@@ -704,8 +769,7 @@
               </div>
             </div>
 
-            <!-- Piece 2: Sacred Lotus & Chakra Nodes -->
-            <div class="piece-card bento-col-4" data-inspect='{
+            <div class="piece-card bento-col-4 tilt-card" data-inspect='{
               "title": "Sacred Lotus Silhouette & 7 Chakra Alignment",
               "category": "Antarjyoti • Collection 03",
               "desc": "Concept and mood board exploring circular geometry, vertical alignment, and energy node progression from Muladhara to Sahasrara.",
@@ -727,8 +791,7 @@
               </div>
             </div>
 
-            <!-- Piece 3: Technical Orthographic CAD Projections -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Sahasrasa & Padma Bangle Orthographic CAD Sheets",
               "category": "Antarjyoti • Collection 03",
               "desc": "Precise technical orthographic drawings specifying inner/outer diameters, band thickness, motif height, and repeat intervals.",
@@ -750,8 +813,7 @@
               </div>
             </div>
 
-            <!-- Piece 4: Full Gemstone Sieve Sheet -->
-            <div class="piece-card bento-col-6" data-inspect='{
+            <div class="piece-card bento-col-6 tilt-card" data-inspect='{
               "title": "Diamond & Gemstone Sieve Specification Sheet",
               "category": "Antarjyoti • Collection 03",
               "desc": "Exhaustive gemstone and diamond specification breakdown including sieve sizes, millimeter dimensions, carat weights, color codes, and setting types.",
@@ -779,8 +841,7 @@
              COLLECTION 04: NAADRAGA
              ========================================== -->
         <div class="collection-panel active" id="panel-naadraga">
-          <!-- Lead Card -->
-          <div class="collection-lead-card">
+          <div class="collection-lead-card tilt-card">
             <div class="collection-lead-media">
               <img src="assets/pages_web/page_03.webp" alt="NaadRaga Classical Harmony" loading="lazy">
               <div class="collection-lead-overlay">
@@ -806,7 +867,7 @@
     </section>
 
     <!-- AUTHENTIC HAND SKETCHES & SILHOUETTE PROCESS -->
-    <section class="section section-alt sketches-reel-section" id="sketches">
+    <section class="section section-alt" id="sketches">
       <div class="container">
         <div class="section-header">
           <span class="section-pretitle">Craftsmanship & Ideation</span>
@@ -817,8 +878,7 @@
         </div>
 
         <div class="sketches-grid">
-          <!-- Sketch 1: Rajasthani Arches & Motifs -->
-          <div class="sketch-card" data-inspect='{
+          <div class="sketch-card tilt-card" data-inspect='{
             "title": "Rajasthani Gateway Arches & Teardrops",
             "category": "Rajdwara Hand Sketchbook",
             "desc": "Hand-inked form explorations of cusped arches, toran frames, and teardrop articulated brooches.",
@@ -834,8 +894,7 @@
             </div>
           </div>
 
-          <!-- Sketch 2: Paisley & Brooch Articulations -->
-          <div class="sketch-card" data-inspect='{
+          <div class="sketch-card tilt-card" data-inspect='{
             "title": "Paisley & Kalangi Crest Form Ideation",
             "category": "Rajdwara Hand Sketchbook",
             "desc": "Detailed line studies developing lotus abstractions, scalloped edges, and vertical Rajput kalangi silhouettes.",
@@ -851,8 +910,7 @@
             </div>
           </div>
 
-          <!-- Sketch 3: Sacred Chakra Symbols -->
-          <div class="sketch-card" data-inspect='{
+          <div class="sketch-card tilt-card" data-inspect='{
             "title": "Sacred Chakra Geometry & Lotus Petals",
             "category": "Antarjyoti Hand Sketchbook",
             "desc": "Geometric ink studies of the 7 chakras, Sanskrit seed syllables, and radial petal progressions.",
@@ -868,8 +926,7 @@
             </div>
           </div>
 
-          <!-- Sketch 4: High Jewelry Necklaces & Bangles -->
-          <div class="sketch-card" data-inspect='{
+          <div class="sketch-card tilt-card" data-inspect='{
             "title": "Chakra Necklace & Filigree Frameworks",
             "category": "Antarjyoti Hand Sketchbook",
             "desc": "Explorations of collar drape, bezel-framed cabochons, and interlocking petal drop links.",
@@ -900,7 +957,6 @@
         </div>
 
         <div class="spread-reader-box">
-          <!-- Toolbar -->
           <div class="spread-reader-toolbar">
             <div class="toolbar-info">
               <span class="page-counter-badge" id="spread-counter-text">Spread 01 of 21 • Cover: Portfolio 2026</span>
@@ -913,7 +969,6 @@
             </div>
           </div>
 
-          <!-- Main Stage -->
           <div class="spread-display-stage">
             <button class="spread-nav-arrow arrow-prev" id="spread-stage-prev" onclick="document.getElementById('spread-prev-btn').click();" aria-label="Previous Spread">◀</button>
             <img 
@@ -925,10 +980,7 @@
             <button class="spread-nav-arrow arrow-next" id="spread-stage-next" onclick="document.getElementById('spread-next-btn').click();" aria-label="Next Spread">▶</button>
           </div>
 
-          <!-- Thumbnail Strip -->
-          <div class="spread-thumbnail-strip" id="spread-thumb-strip">
-            <!-- Dynamically populated via app.js with all 21 spreads -->
-          </div>
+          <div class="spread-thumbnail-strip" id="spread-thumb-strip"></div>
         </div>
       </div>
     </section>
@@ -945,8 +997,7 @@
         </div>
 
         <div class="about-grid">
-          <!-- Profile Card -->
-          <div class="about-profile-card">
+          <div class="about-profile-card tilt-card">
             <div class="profile-stamp-wrap">
               <img src="assets/extracted_images/p02_img03.jpeg" alt="Soumi Mukherjee Portrait">
             </div>
@@ -988,9 +1039,7 @@
             </div>
           </div>
 
-          <!-- Resume Details -->
           <div class="resume-stack">
-            <!-- Education -->
             <div>
               <h4 class="resume-block-title">🎓 Education</h4>
               <div class="timeline">
@@ -1014,7 +1063,6 @@
               </div>
             </div>
 
-            <!-- Professional Volunteering & Projects -->
             <div>
               <h4 class="resume-block-title">💼 Professional Volunteering & Project Experience</h4>
               <div class="timeline">
@@ -1045,7 +1093,6 @@
               </div>
             </div>
 
-            <!-- Skills Matrix -->
             <div>
               <h4 class="resume-block-title">⚡ Skills & Technical Competencies</h4>
               <div class="skills-matrix">
@@ -1101,7 +1148,7 @@
     <!-- CONTACT & JURY CONNECT -->
     <section class="section contact-section" id="contact">
       <div class="container">
-        <div class="contact-card">
+        <div class="contact-card tilt-card">
           <div class="contact-callout">
             <span class="section-pretitle">Let's Connect</span>
             <h3>Ready for Placements & Design Collaborations</h3>
@@ -1131,7 +1178,7 @@
                   <span>💼</span>
                   <span>linkedin.com/in/soumi-mukherjee</span>
                 </div>
-                <span style="font-size: 0.8rem; color: var(--color-gold-primary);">Visit Profile ↗</span>
+                <span style="font-size: 0.8rem; color: var(--gold-primary);">Visit Profile ↗</span>
               </a>
 
               <a href="https://www.behance.net/soumimukherjee3" target="_blank" rel="noopener" class="contact-pill-item">
@@ -1139,12 +1186,11 @@
                   <span>🎨</span>
                   <span>behance.net/soumimukherjee3</span>
                 </div>
-                <span style="font-size: 0.8rem; color: var(--color-gold-primary);">View Projects ↗</span>
+                <span style="font-size: 0.8rem; color: var(--gold-primary);">View Projects ↗</span>
               </a>
             </div>
           </div>
 
-          <!-- Quick Inquiry Form -->
           <div>
             <form class="inquiry-form" id="inquiry-form">
               <div class="form-group">
@@ -1170,7 +1216,6 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <p>
@@ -1193,14 +1238,14 @@
         <span class="modal-category" id="modal-category">Jewelry Piece</span>
         <h3 class="modal-title" id="modal-title">Piece Title</h3>
         <p class="modal-desc" id="modal-desc">Piece description and technical rationale.</p>
-        <div class="modal-specs-list" id="modal-specs-list">
-          <!-- Populated dynamically via JS -->
-        </div>
+        <div class="modal-specs-list" id="modal-specs-list"></div>
       </div>
     </div>
   </div>
 
-  <!-- Interactive Scripts -->
+  <!-- Three.js Library -->
+  <script src="assets/three.min.js"></script>
+  <!-- Application Logic -->
   <script src="app.js"></script>
 </body>
 </html>

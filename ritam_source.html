@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ritam Roy — Creative AI Engineer & Data Scientist</title>
+  <meta name="description" content="Portfolio of Ritam Roy — Junior AI Engineer & Data Scientist specializing in Autonomous SLM Swarms, Enterprise RAG Systems, and Machine Learning.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Italiana&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading-state">
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- PRELOADER (Exact match to reel intro) -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-counter" id="preloaderCounter">0%</div>
+      <div class="preloader-spinner-wrap" id="preloaderSpinnerWrap">
+        <svg class="preloader-arc" viewBox="0 0 100 100">
+          <circle class="preloader-arc-bg" cx="50" cy="50" r="40"></circle>
+          <circle class="preloader-arc-progress" id="preloaderArc" cx="50" cy="50" r="40"></circle>
+        </svg>
+      </div>
+      <div class="preloader-greeting" id="preloaderGreeting">hello</div>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN HAMBURGER OVERLAY MENU -->
+  <div class="menu-overlay" id="menuOverlay">
+    <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">✕</button>
+    <div class="menu-content">
+      <nav class="menu-nav">
+        <a href="#hero" class="menu-link" data-text="HOME">HOME</a>
+        <a href="#about" class="menu-link" data-text="ABOUT">ABOUT</a>
+        <a href="#tools" class="menu-link" data-text="TOOLS">TOOLS</a>
+        <a href="#expertise" class="menu-link" data-text="EXPERTISE">EXPERTISE</a>
+        <a href="#work" class="menu-link" data-text="WORK">WORK</a>
+        <a href="./architecture/" class="menu-link" data-text="JOURNAL">JOURNAL (CYPHER AI)</a>
+        <a href="#contact" class="menu-link" data-text="CONTACT">CONTACT</a>
+      </nav>
+      <div class="menu-footer">
+        <a href="Ritam_Roy_Resume.pdf" target="_blank" class="menu-resume-link">DOWNLOAD RESUME ↗</a>
+        <div class="menu-socials">
+          <a href="https://github.com/ritamroy10" target="_blank" rel="noopener">GITHUB</a>
+          <a href="https://www.linkedin.com/in/ritam-roy-70631b420/" target="_blank" rel="noopener">LINKEDIN</a>
+          <a href="mailto:ritamroy.work@gmail.com">EMAIL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HERO SECTION (WARM LUXURY LIGHT THEME) ==================== -->
+  <header class="hero-section" id="hero">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar-container">
+        <!-- Handwritten signature logo -->
+        <a href="#hero" class="signature-logo" aria-label="Ritam Roy Home">
+          <span>ritam</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="#work" class="nav-link">WORK</a></li>
+          <li><a href="#about" class="nav-link">ABOUT</a></li>
+          <li><a href="#tools" class="nav-link">TOOLS</a></li>
+          <li><a href="#expertise" class="nav-link">EXPERTISE</a></li>
+          <li><a href="./architecture/" class="nav-link">JOURNAL</a></li>
+          <li><a href="#contact" class="nav-link">CONTACT</a></li>
+        </ul>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Main Typography (Exact match to Frame 15/18) -->
+    <div class="hero-center">
+      <div class="kinetic-text-wrap">
+        <h1 class="kinetic-title">CREATIVE</h1>
+        <div class="kinetic-subtitle">DEVELOPER</div>
+      </div>
+
+      <!-- Keywords Row -->
+      <div class="hero-keywords">
+        <span class="keyword">VISUALS</span>
+        <span class="dot">•</span>
+        <span class="keyword">CODE</span>
+        <span class="dot">•</span>
+        <span class="keyword">EXPERIENCE</span>
+      </div>
+
+      <!-- Scroll indicator -->
+      <a href="#about" class="scroll-explore" aria-label="Scroll to explore">
+        <span>SCROLL TO EXPLORE</span>
+        <div class="scroll-mouse-icon">
+          <div class="scroll-wheel"></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Hero Bottom Bar -->
+    <div class="hero-bottom-bar">
+      <div class="copyright-tag">
+        ©2026 <em>ritam</em>
+      </div>
+
+      <!-- Rotating Badge (Let's Work Together) -->
+      <a href="#contact" class="rotating-badge-wrap" aria-label="Work Together">
+        <div class="rotating-badge">
+          <svg viewBox="0 0 100 100" class="rotating-svg">
+            <path id="badgePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+            <text class="badge-text">
+              <textPath href="#badgePath" startOffset="0%">
+                LET'S WORK TOGETHER • LET'S WORK TOGETHER •
+              </textPath>
+            </text>
+          </svg>
+          <div class="badge-center-arrow">↗</div>
+        </div>
+        <div class="badge-location-text">BASED IN INDIA</div>
+      </a>
+    </div>
+  </header>
+
+  <!-- ==================== CURVED TRANSITION DIVIDER ==================== -->
+  <div class="transition-curve-wrap">
+    <svg class="transition-curve-svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,0 C480,110 960,110 1440,0 L1440,120 L0,120 Z" fill="#070707"></path>
+    </svg>
+  </div>
+
+  <!-- ==================== DARK SECTION CONTAINER ==================== -->
+  <main class="dark-container">
+
+    <!-- ==================== SECTION 01: TOOLS & ECOSYSTEM (NEW) ==================== -->
+    <section class="tools-section" id="tools">
+      <div class="section-header-centered">
+        <div class="section-pill-tag">
+          <span class="tag-number">01</span>
+          <span class="tag-dash">——</span>
+          <span class="tag-title">TECHNICAL ARSENAL</span>
+        </div>
+        <h2 class="section-big-title-metallic">TOOLS & PLATFORMS</h2>
+        <div class="golden-separator-line"></div>
+        <p class="section-lead-text">
+          The specialized developer environments, computational clouds, and machine learning toolchains I command daily.
+        </p>
+      </div>
+
+      <div class="tools-grid">
+        <!-- Tool 1: Kaggle -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/kaggle.svg" alt="Kaggle" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">ML & DATASETS</span>
+          </div>
+          <h3 class="tool-title">Kaggle</h3>
+          <p class="tool-desc">
+            Benchmark dataset research, exploratory data analytics, machine learning kernel prototyping, and competitive data science experimentation.
+          </p>
+        </div>
+
+        <!-- Tool 2: Hugging Face -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/huggingface.svg" alt="Hugging Face" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">SLMs & MODELS</span>
+          </div>
+          <h3 class="tool-title">Hugging Face</h3>
+          <p class="tool-desc">
+            Open-weight Small Language Model (SLM) discovery, tokenizer engineering, PEFT/LoRA fine-tuning pipelines, and Hub model deployment.
+          </p>
+        </div>
+
+        <!-- Tool 3: Jupyter Notebook -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/jupyter.svg" alt="Jupyter Notebook" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">INTERACTIVE EDA</span>
+          </div>
+          <h3 class="tool-title">Jupyter Notebook</h3>
+          <p class="tool-desc">
+            Interactive scientific computing, statistical feature engineering, model training loops, and exploratory data visualizations.
+          </p>
+        </div>
+
+        <!-- Tool 4: Google Colab -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/googlecolab.svg" alt="Google Colab" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">CLOUD GPU</span>
+          </div>
+          <h3 class="tool-title">Google Colab</h3>
+          <p class="tool-desc">
+            Accelerated cloud notebook runtime for fast deep learning experimentation, model benchmarking, and collaborative research iterations.
+          </p>
+        </div>
+
+        <!-- Tool 5: RunPod GPU Cloud -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/runpod.svg" alt="RunPod GPU Cloud" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">GPU INFRASTRUCTURE</span>
+          </div>
+          <h3 class="tool-title">RunPod GPU Cloud</h3>
+          <p class="tool-desc">
+            Dedicated multi-GPU cluster provisioning, low-latency vLLM inference endpoints, and scalable cloud container execution for SLM swarms.
+          </p>
+        </div>
+
+        <!-- Tool 6: Antigravity IDE -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/antigravity.svg" alt="Antigravity IDE" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">AGENTIC AI IDE</span>
+          </div>
+          <h3 class="tool-title">Antigravity IDE</h3>
+          <p class="tool-desc">
+            Advanced agentic pair-programming workflows, multi-agent automated code synthesis, and intelligent full-stack system architecture development.
+          </p>
+        </div>
+
+        <!-- Tool 7: OpenAI Codex & LLMs -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/openai.svg" alt="OpenAI Codex" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">AI CODE SYNTHESIS</span>
+          </div>
+          <h3 class="tool-title">Codex & LLMs</h3>
+          <p class="tool-desc">
+            Structured prompt engineering, tool-calling agent orchestrations, synthetic dataset generation, and semantic API integrations.
+          </p>
+        </div>
+
+        <!-- Tool 8: VS Code -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/vscode.svg" alt="Visual Studio Code" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">PRIMARY IDE</span>
+          </div>
+          <h3 class="tool-title">VS Code</h3>
+          <p class="tool-desc">
+            Primary development ecosystem for Python backend microservices, virtual environment management, Git versioning, and frontend styling.
+          </p>
+        </div>
+
+        <!-- Tool 9: Microsoft Services (Excel, Word, PowerPoint) -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/m365.svg" alt="Microsoft 365" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">OFFICE & ANALYTICS</span>
+          </div>
+          <h3 class="tool-title">Microsoft Services</h3>
+          <p class="tool-desc">
+            Advanced Excel data modeling & pivot analytics, technical system specifications in Word, and high-impact presentation decks in PowerPoint.
+          </p>
+          <div class="tool-sub-icons">
+            <img src="icons/excel.svg" alt="Excel" class="sub-icon" title="Excel">
+            <img src="icons/word.svg" alt="Word" class="sub-icon" title="Word">
+            <img src="icons/powerpoint.svg" alt="PowerPoint" class="sub-icon" title="PowerPoint">
+          </div>
+        </div>
+
+        <!-- Tool 10: Python Scientific & ML Libraries -->
+        <div class="tool-card">
+          <div class="tool-top-row">
+            <div class="tool-icon-box">
+              <img src="icons/python.svg" alt="Python Libraries" class="tool-icon-img">
+            </div>
+            <span class="tool-cat-badge">CORE STACK</span>
+          </div>
+          <h3 class="tool-title">Python ML Ecosystem</h3>
+          <p class="tool-desc">
+            Deep learning with PyTorch, predictive machine learning with Scikit-learn, tabular manipulation via Pandas/NumPy, and high-speed APIs with FastAPI.
+          </p>
+          <div class="tool-sub-icons">
+            <img src="icons/pytorch.svg" alt="PyTorch" class="sub-icon" title="PyTorch">
+            <img src="icons/scikitlearn.svg" alt="Scikit-Learn" class="sub-icon" title="Scikit-Learn">
+            <img src="icons/pandas.svg" alt="Pandas" class="sub-icon" title="Pandas">
+            <img src="icons/fastapi.svg" alt="FastAPI" class="sub-icon" title="FastAPI">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 02: ABOUT ME ==================== -->
+    <section class="about-section" id="about">
+      <!-- Section Tag & Metallic Header -->
+      <div class="section-header-centered">
+        <div class="section-pill-tag">
+          <span class="tag-number">02</span>
+          <span class="tag-dash">——</span>
+          <span class="tag-title">THE PERSON BEHIND THE WORK</span>
+        </div>
+        <h2 class="section-big-title-metallic">ABOUT ME</h2>
+        <div class="golden-separator-line"></div>
+      </div>
+
+      <!-- About Layout Grid -->
+      <div class="about-grid">
+        <!-- Left: Portrait Photo Card -->
+        <div class="portrait-card-wrap">
+          <div class="portrait-card">
+            <img src="ritam_avatar.jpg" alt="Ritam Roy" class="portrait-image" loading="lazy">
+            <div class="portrait-vignette"></div>
+            <!-- Floating code badge (exact match to video) -->
+            <div class="portrait-badge">
+              <span class="badge-icon">&lt;/&gt;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Bio & Metadata Grid -->
+        <div class="about-details">
+          <div class="who-am-i-tag">—— WHO AM I ?</div>
+          
+          <h3 class="about-headline">
+            I BUILD <span class="white-text">DIGITAL WORLDS WHERE</span> <span class="gold-accent-text">DESIGN MEETS CODE.</span>
+          </h3>
+
+          <!-- Two-column bio paragraph -->
+          <div class="about-bios-grid">
+            <p class="bio-text">
+              I'm <strong>Ritam Roy</strong> — a creative AI Engineer & Data Scientist at Arbood Consultancy, turning complex architectures, intelligent algorithms, and modern frontend motion into memorable digital experiences.
+            </p>
+            <p class="bio-text">
+              I care about the details most people don't notice: the latency of token streaming, the rhythm of typography, retrieval precision, and the tiny moments that make an intelligent product feel genuinely alive.
+            </p>
+          </div>
+
+          <!-- 3-Column Minimalist Metadata Grid (Exact Frame 50 match) -->
+          <div class="metadata-grid">
+            <div class="meta-item">
+              <span class="meta-label">BASED</span>
+              <span class="meta-value">INDIA</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">FOCUS</span>
+              <span class="meta-value">AI / SLMs / MOTION</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">BUILDING WEBSITES</span>
+              <span class="meta-value">1ST YEAR</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">MINDSET</span>
+              <span class="meta-value">ALWAYS LEARNING</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">PROJECTS DONE</span>
+              <span class="meta-value">10+</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">EDUCATION</span>
+              <span class="meta-value">B.TECH CSE (UEM)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 03: MY EXPERTISE ==================== -->
+    <section class="expertise-section" id="expertise">
+      <div class="expertise-grid">
+        <!-- Left Column -->
+        <div class="expertise-left">
+          <div class="section-pill-tag">
+            <span class="tag-number">03</span>
+            <span class="tag-dash">——</span>
+            <span class="tag-title">EXPERTISE</span>
+          </div>
+
+          <h2 class="expertise-title">
+            <span class="title-outline">MY</span>
+            <span class="title-solid">EXPERTISE</span>
+          </h2>
+
+          <p class="expertise-subtitle">
+            I design and build digital experiences where <span class="gold-text">design, code and motion</span> work as one.
+          </p>
+
+          <p class="expertise-description">
+            From expressive interfaces to smooth interactions, I combine AI engineering with visual design to create digital experiences that feel intuitive, performant, and unforgettable.
+          </p>
+
+          <!-- Floating Tech Badges (GSAP, JS, React, HTML5) -->
+          <div class="tech-stack-chips">
+            <span class="tech-chip"><i class="chip-dot"></i> Python</span>
+            <span class="tech-chip"><i class="chip-dot"></i> GSAP & Motion</span>
+            <span class="tech-chip"><i class="chip-dot"></i> SLMs & LLMs</span>
+            <span class="tech-chip"><i class="chip-dot"></i> PyTorch</span>
+            <span class="tech-chip"><i class="chip-dot"></i> RAG & Vectors</span>
+            <span class="tech-chip"><i class="chip-dot"></i> JavaScript & CSS</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive List Rows -->
+        <div class="expertise-right">
+          <!-- Item 01 -->
+          <div class="expertise-row" data-preview="dev">
+            <div class="row-num">01</div>
+            <div class="row-icon-box">&lt;/&gt;</div>
+            <div class="row-content">
+              <span class="row-cat">01 / DEVELOPMENT</span>
+              <h3 class="row-title">Creative Development</h3>
+              <p class="row-desc">Building fast, responsive, and scalable interfaces with modern frontend technologies and clean modular architectures.</p>
+            </div>
+            <div class="row-arrow">↗</div>
+          </div>
+
+          <!-- Item 02 -->
+          <div class="expertise-row" data-preview="motion">
+            <div class="row-num">02</div>
+            <div class="row-icon-box">✦</div>
+            <div class="row-content">
+              <span class="row-cat">02 / MOTION</span>
+              <h3 class="row-title">Motion & Interaction</h3>
+              <p class="row-desc">Turning static interfaces into expressive experiences with meaningful motion, micro-interactions, and buttery smooth scrolling.</p>
+            </div>
+            <div class="row-arrow">↗</div>
+          </div>
+
+          <!-- Item 03 -->
+          <div class="expertise-row" data-preview="ai">
+            <div class="row-num">03</div>
+            <div class="row-icon-box">🧠</div>
+            <div class="row-content">
+              <span class="row-cat">03 / INTELLIGENCE</span>
+              <h3 class="row-title">AI & SLM Orchestration</h3>
+              <p class="row-desc">Autonomous multi-agent swarms, specialized reasoning nodes, and low-latency inference pipelines built for production workloads.</p>
+            </div>
+            <div class="row-arrow">↗</div>
+          </div>
+
+          <!-- Item 04 -->
+          <div class="expertise-row" data-preview="apps">
+            <div class="row-num">04</div>
+            <div class="row-icon-box">⚡</div>
+            <div class="row-content">
+              <span class="row-cat">04 / ARCHITECTURE</span>
+              <h3 class="row-title">Modern Web & Data Systems</h3>
+              <p class="row-desc">Developing interactive applications with component-based architecture, FastAPI microservices, and dynamic real-time data flows.</p>
+            </div>
+            <div class="row-arrow">↗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Reaction Hover Preview (Exact match to video Frame 60/75) -->
+      <div class="floating-preview-card" id="floatingPreview">
+        <div class="preview-icons">
+          <span class="preview-btn">🤍</span>
+          <span class="preview-divider">→</span>
+          <span class="preview-btn active">💜</span>
+        </div>
+        <div class="preview-icons">
+          <span class="preview-btn">👍</span>
+          <span class="preview-divider">→</span>
+          <span class="preview-btn active">👍</span>
+        </div>
+        <div class="preview-pill-bar">
+          <span class="pill-slider"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MARQUEE TICKER BANNER ==================== -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span>MOTION DESIGN</span>
+        <span class="star">✦</span>
+        <span>UI/UX</span>
+        <span class="star">✦</span>
+        <span>INTERACTIVE WEB</span>
+        <span class="star">✦</span>
+        <span>CREATIVE DEVELOPMENT</span>
+        <span class="star">✦</span>
+        <span>AUTONOMOUS SLMS</span>
+        <span class="star">✦</span>
+        <span>RAG PIPELINES</span>
+        <span class="star">✦</span>
+        <span>MOTION DESIGN</span>
+        <span class="star">✦</span>
+        <span>UI/UX</span>
+        <span class="star">✦</span>
+        <span>INTERACTIVE WEB</span>
+        <span class="star">✦</span>
+        <span>CREATIVE DEVELOPMENT</span>
+        <span class="star">✦</span>
+        <span>AUTONOMOUS SLMS</span>
+        <span class="star">✦</span>
+        <span>RAG PIPELINES</span>
+        <span class="star">✦</span>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 04: FEATURED WORK ==================== -->
+    <section class="work-section" id="work">
+      <!-- Gigantic Liquid Golden WORK Header (Frame 85) -->
+      <div class="work-giant-header">
+        <h2 class="work-giant-title">WORK</h2>
+        <div class="work-subheading">MY WORK</div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="projects-list">
+
+        <!-- Project 1: CYPHER AI -->
+        <article class="project-card">
+          <div class="project-backdrop" style="background-image: url('project_cypher.jpg');"></div>
+          <div class="project-overlay"></div>
+          
+          <div class="project-content">
+            <div class="project-meta-top">
+              <span class="project-category-tag">—— CYPHER • 01</span>
+              <span class="project-badge-secondary">SLM SWARM ARCHITECTURE</span>
+            </div>
+
+            <h3 class="project-title">Autonomous SLM Swarm Intelligence</h3>
+            
+            <p class="project-desc">
+              A distributed multi-agent small language model orchestration framework engineered to run specialized reasoning nodes with collaborative decision-making, minimal memory footprints, and enterprise performance.
+            </p>
+
+            <!-- Detailed Point-by-Point Breakdown (Requirement 2) -->
+            <div class="project-spec-list">
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Dynamic Multi-Agent Swarm Routing:</strong> Dispatches incoming complex prompts to specialized reasoning nodes (Code Synthesis, Logic Verification, Contextual Search).</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Hardware-Optimized Quantization:</strong> Implements 4-bit / 8-bit quantized SLMs on RunPod cloud GPUs, cutting compute overhead by 68% while preserving precision.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Consensus & Validation Layer:</strong> Peer-verification protocol where agent outputs are evaluated and refined automatically before final streaming.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Live Interactive Telemetry:</strong> Features an embedded real-time web portal with token streaming metrics, memory telemetry, and latency monitors.</span>
+              </div>
+            </div>
+
+            <div class="project-tech-pills">
+              <span class="pill">Python</span>
+              <span class="pill">SLM Orchestration</span>
+              <span class="pill">PyTorch</span>
+              <span class="pill">FastAPI</span>
+              <span class="pill">RunPod GPU</span>
+              <span class="pill">Hugging Face</span>
+            </div>
+          </div>
+
+          <!-- Circular Live Demo Button (Exact match to video Frame 95) -->
+          <div class="project-action-wrap">
+            <a href="./architecture/" class="circular-action-btn" aria-label="View Cypher AI Architecture">
+              <div class="action-circle-badge">
+                <svg viewBox="0 0 100 100" class="rotating-svg">
+                  <path id="cypherPath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                  <text class="badge-text">
+                    <textPath href="#cypherPath" startOffset="0%">
+                      • LIVE ARCHITECTURE • VIEW SYSTEM •
+                    </textPath>
+                  </text>
+                </svg>
+                <div class="badge-center-arrow">↗</div>
+              </div>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2: Enterprise RAG Chatbot -->
+        <article class="project-card">
+          <div class="project-backdrop" style="background-image: url('project_rag.jpg');"></div>
+          <div class="project-overlay"></div>
+          
+          <div class="project-content">
+            <div class="project-meta-top">
+              <span class="project-category-tag">—— RETRIEVAL • 02</span>
+              <span class="project-badge-secondary">VECTOR SEARCH ENGINE</span>
+            </div>
+
+            <h3 class="project-title">Context-Aware Knowledge Engine</h3>
+            
+            <p class="project-desc">
+              High-precision enterprise Retrieval-Augmented Generation (RAG) platform transforming raw unstructured corporate documentation into verifiable, cited intelligence with zero hallucination.
+            </p>
+
+            <!-- Detailed Point-by-Point Breakdown (Requirement 2) -->
+            <div class="project-spec-list">
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Hybrid Dense-Sparse Vector Retrieval:</strong> Combines dense semantic vector embeddings with BM25 keyword matching for 98.4% retrieval accuracy across technical corpora.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Hierarchical Semantic Chunking:</strong> Dynamic token windowing respecting document headers, table schemas, and code blocks to preserve architectural context.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Cross-Encoder Re-Ranking:</strong> Two-stage retrieval pipeline passing top candidates through a cross-encoder model to eliminate irrelevant background noise.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Direct Attribution & Citations:</strong> Generates inline verifiable reference links and confidence scores, providing clear explainability for every single answer.</span>
+              </div>
+            </div>
+
+            <div class="project-tech-pills">
+              <span class="pill">ChromaDB</span>
+              <span class="pill">Qdrant</span>
+              <span class="pill">Hugging Face</span>
+              <span class="pill">LangChain</span>
+              <span class="pill">Python</span>
+              <span class="pill">FastAPI</span>
+            </div>
+          </div>
+
+          <!-- Circular Code Button -->
+          <div class="project-action-wrap">
+            <a href="https://github.com/ritamroy10" target="_blank" rel="noopener" class="circular-action-btn" aria-label="View GitHub Repository">
+              <div class="action-circle-badge">
+                <svg viewBox="0 0 100 100" class="rotating-svg">
+                  <path id="ragPath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                  <text class="badge-text">
+                    <textPath href="#ragPath" startOffset="0%">
+                      • GITHUB REPO • VIEW CODE •
+                    </textPath>
+                  </text>
+                </svg>
+                <div class="badge-center-arrow">↗</div>
+              </div>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 3: Rainfall Prediction ML -->
+        <article class="project-card">
+          <div class="project-backdrop" style="background-image: url('project_climate.jpg');"></div>
+          <div class="project-overlay"></div>
+          
+          <div class="project-content">
+            <div class="project-meta-top">
+              <span class="project-category-tag">—— CLIMATE ML • 03</span>
+              <span class="project-badge-secondary">DATA SCIENCE PIPELINE</span>
+            </div>
+
+            <h3 class="project-title">Predictive Climate Machine Learning</h3>
+            
+            <p class="project-desc">
+              End-to-end meteorological machine learning pipeline trained on multi-year weather stations, detecting precipitation anomalies and providing actionable meteorological forecasts.
+            </p>
+
+            <!-- Detailed Point-by-Point Breakdown (Requirement 2) -->
+            <div class="project-spec-list">
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Automated Feature Pipeline:</strong> Imputation of missing readings, cyclical sine/cosine transforms for seasonality, and atmospheric pressure delta analysis.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Ensemble Gradient Boosting:</strong> Hyperparameter-tuned XGBoost and Random Forest classifiers delivering 91.2% accuracy in predicting rain occurrence.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>Time-Series Cross-Validation:</strong> Rolling window validation preventing chronological data leakage and ensuring robust out-of-sample generalization.</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-bullet">✦</span>
+                <span><strong>SHAP Explainability Insights:</strong> Model interpretability visualizer demonstrating exact feature contributions (humidity gradients, cloud cover, dew point).</span>
+              </div>
+            </div>
+
+            <div class="project-tech-pills">
+              <span class="pill">Scikit-Learn</span>
+              <span class="pill">Pandas</span>
+              <span class="pill">NumPy</span>
+              <span class="pill">Jupyter Notebook</span>
+              <span class="pill">XGBoost</span>
+              <span class="pill">Seaborn</span>
+            </div>
+          </div>
+
+          <!-- Circular Code Button -->
+          <div class="project-action-wrap">
+            <a href="https://github.com/ritamroy10" target="_blank" rel="noopener" class="circular-action-btn" aria-label="View GitHub Repository">
+              <div class="action-circle-badge">
+                <svg viewBox="0 0 100 100" class="rotating-svg">
+                  <path id="climatePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                  <text class="badge-text">
+                    <textPath href="#climatePath" startOffset="0%">
+                      • GITHUB REPO • VIEW CODE •
+                    </textPath>
+                  </text>
+                </svg>
+                <div class="badge-center-arrow">↗</div>
+              </div>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 05: CONTACT (EXACT MATCH TO FRAME 116/117) ==================== -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <!-- Left Column: Heading & Contact Links -->
+        <div class="contact-left">
+          <h2 class="contact-main-heading">
+            Let's create<br>
+            <span class="contact-script-word">something</span><br>
+            meaningful.
+          </h2>
+
+          <p class="contact-subtext">
+            Have a project in mind, an AI initiative, or simply want to talk about research? I'd love to hear from you.
+          </p>
+
+          <div class="contact-cards-list">
+            <!-- Card 1: Email me -->
+            <a href="mailto:ritamroy.work@gmail.com" class="contact-info-card">
+              <div class="card-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+              </div>
+              <div class="card-text-group">
+                <span class="card-label">Email me</span>
+                <span class="card-val">ritamroy.work@gmail.com</span>
+              </div>
+              <div class="card-arrow">↗</div>
+            </a>
+
+            <!-- Card 2: LinkedIn -->
+            <a href="https://www.linkedin.com/in/ritam-roy-70631b420/" target="_blank" rel="noopener" class="contact-info-card">
+              <div class="card-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect width="4" height="12" x="2" y="9"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </div>
+              <div class="card-text-group">
+                <span class="card-label">Connect</span>
+                <span class="card-val">LinkedIn</span>
+              </div>
+              <div class="card-arrow">↗</div>
+            </a>
+
+            <!-- Card 3: Based in -->
+            <div class="contact-info-card">
+              <div class="card-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="card-text-group">
+                <span class="card-label">Based in</span>
+                <span class="card-val">Kolkata, India</span>
+              </div>
+              <div class="card-arrow">↗</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Contact Form -->
+        <div class="contact-right">
+          <form class="contact-form-box" id="contactForm">
+            <div class="form-field">
+              <label for="contactName">Name</label>
+              <input type="text" id="contactName" name="name" placeholder="Your name" required autocomplete="name">
+            </div>
+
+            <div class="form-field">
+              <label for="contactEmail">Email</label>
+              <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required autocomplete="email">
+            </div>
+
+            <div class="form-field">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span>Send Message ↗</span>
+            </button>
+
+            <!-- Form Status Feedback -->
+            <div class="form-status" id="formStatus"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <div class="footer-signature">ritam</div>
+          <p>© 2026 Ritam Roy. Built from scratch with HTML, CSS, JavaScript & motion.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="Ritam_Roy_Resume.pdf" target="_blank">Resume PDF</a>
+          <a href="./architecture/">CYPHER AI Journal</a>
+          <a href="https://github.com/ritamroy10/ritamroy10.github.io" target="_blank" rel="noopener">GitHub Repository</a>
+          <a href="#hero" class="back-to-top">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
