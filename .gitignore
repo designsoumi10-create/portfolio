@@ -1,0 +1,10 @@
+# Intermediate extraction files (heavy 10k raw spreads & temporary data)
+assets/pages/
+assets/extracted_images/
+video_frames/
+*.log
+portfolio_extracted.json
+parse_portfolio.py
+portfolio_full_readable.txt
+resume_extracted.txt
+SaveInta.com_*.mp4
