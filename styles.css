@@ -54,23 +54,71 @@
   --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Light Theme Variables */
+/* Light Theme Variables & Overrides */
 body.light-theme {
   --color-bg-primary: #fcfbf9;
   --color-bg-secondary: #f4efe6;
-  --color-bg-card: rgba(255, 255, 255, 0.85);
+  --color-bg-card: rgba(255, 255, 255, 0.9);
   --color-bg-card-hover: rgba(255, 255, 255, 0.98);
-  --color-bg-glass: rgba(252, 251, 249, 0.85);
+  --color-bg-glass: rgba(252, 251, 249, 0.88);
   
   --color-text-main: #1c1d21;
-  --color-text-muted: #5a616d;
-  --color-text-dim: #848c99;
+  --color-text-muted: #4e5562;
+  --color-text-dim: #737c8c;
   
-  --color-border-subtle: rgba(0, 0, 0, 0.08);
-  --color-border-gold: rgba(184, 134, 11, 0.35);
+  --color-border-subtle: rgba(0, 0, 0, 0.1);
+  --color-border-gold: rgba(184, 134, 11, 0.4);
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+body.light-theme .resume-block-title,
+body.light-theme .stat-value,
+body.light-theme .table-header-title {
+  color: var(--color-velvet-accent);
+}
+
+body.light-theme .tech-table th {
+  background: rgba(120, 23, 38, 0.08);
+  color: var(--color-velvet-accent);
+  border-bottom: 2px solid var(--color-velvet-accent);
+}
+
+body.light-theme .spread-display-stage {
+  background: radial-gradient(circle, #f0eae1 0%, #e2d9cd 100%);
+}
+
+body.light-theme .spread-reader-toolbar {
+  background: #f7f3ec;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .spread-thumbnail-strip {
+  background: #ebe5dc;
+}
+
+body.light-theme .pov-banner {
+  background: rgba(255, 255, 255, 0.92);
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .piece-card-media {
+  background: #f0ebe1;
+}
+
+body.light-theme .modal-container {
+  background: #fcfbf9;
+}
+
+body.light-theme .modal-media-wrap {
+  background: #f0eae1;
+}
+
+body.light-theme .modal-specs-list {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /* Base Reset & Setup */
