@@ -28,18 +28,18 @@
 <body class="loading-state">
 
   <!-- ===================================================================
-       1. PRELOADER ANIMATION (EXACT RITAM ROY SEQUENCE)
+       1. PRELOADER ANIMATION SEQUENCE (EXACT RITAM ROY MATCH)
        =================================================================== -->
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="preloader-content">
+      <div class="preloader-counter" id="preloaderCounter">0%</div>
       <div class="preloader-spinner-wrap" id="preloaderSpinnerWrap">
-        <svg class="preloader-arc" width="90" height="90" viewBox="0 0 90 90">
-          <circle class="preloader-arc-bg" cx="45" cy="45" r="40" stroke-width="2.5" fill="none" />
-          <circle class="preloader-arc-progress" id="preloaderArc" cx="45" cy="45" r="40" stroke-width="2.5" fill="none" />
+        <svg class="preloader-arc" viewBox="0 0 100 100">
+          <circle class="preloader-arc-bg" cx="50" cy="50" r="40"></circle>
+          <circle class="preloader-arc-progress" id="preloaderArc" cx="50" cy="50" r="40"></circle>
         </svg>
-        <span class="preloader-counter" id="preloaderCounter">0%</span>
       </div>
-      <div class="preloader-greeting" id="preloaderGreeting">Soumi Mukherjee</div>
+      <div class="preloader-greeting" id="preloaderGreeting">hello</div>
     </div>
   </div>
 
@@ -55,19 +55,23 @@
   <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
     <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close Navigation Menu">&times;</button>
     <div class="menu-content">
-      <ul class="menu-nav">
-        <li><a href="#hero" class="menu-link">HOME</a></li>
-        <li><a href="#tools" class="menu-link">TOOLS</a></li>
-        <li><a href="#about" class="menu-link">ABOUT</a></li>
-        <li><a href="#expertise" class="menu-link">EXPERTISE</a></li>
-        <li><a href="#work" class="menu-link">WORK</a></li>
-        <li><a href="#spread-viewer" class="menu-link">JURY SPREADS</a></li>
-        <li><a href="#contact" class="menu-link">CONTACT</a></li>
-      </ul>
-      <div style="margin-top: 1.5rem;">
-        <a href="Soumi_Mukherjee_Resume.pdf" class="nav-resume-btn" download style="color: #fff; border-color: rgba(255,255,255,0.2);">
+      <nav class="menu-nav">
+        <a href="#hero" class="menu-link">HOME</a>
+        <a href="#tools" class="menu-link">TOOLS</a>
+        <a href="#about" class="menu-link">ABOUT</a>
+        <a href="#expertise" class="menu-link">EXPERTISE</a>
+        <a href="#work" class="menu-link">WORK</a>
+        <a href="#contact" class="menu-link">CONTACT</a>
+      </nav>
+      <div class="menu-footer">
+        <a href="Soumi_Mukherjee_Resume.pdf" class="menu-resume-link" download>
           DOWNLOAD RESUME ↗
         </a>
+        <div class="menu-socials">
+          <a href="https://www.linkedin.com/in/soumi-mukherjee-87309928b/" target="_blank" rel="noopener">LINKEDIN</a>
+          <a href="mailto:soumimukherjee477@gmail.com">EMAIL</a>
+          <a href="tel:+918250868846">+91 8250868846</a>
+        </div>
       </div>
     </div>
   </div>
@@ -87,7 +91,6 @@
         <li><a href="#tools" class="nav-link">TOOLS</a></li>
         <li><a href="#expertise" class="nav-link">EXPERTISE</a></li>
         <li><a href="#work" class="nav-link">WORK</a></li>
-        <li><a href="#spread-viewer" class="nav-link">JURY SPREADS</a></li>
         <li><a href="#contact" class="nav-link">CONTACT</a></li>
       </ul>
 
@@ -115,7 +118,7 @@
         <span class="dot"></span>
         <span>MODULAR MECHANICS</span>
         <span class="dot"></span>
-        <span>7TH JURY SELECTION</span>
+        <span>LIFESTYLE ACCESSORIES</span>
       </div>
 
       <div style="margin-top: 2rem;">
@@ -167,7 +170,7 @@
 
     <!-- ==================== SECTION 01: TOOLS & ECOSYSTEM ==================== -->
     <section class="tools-section" id="tools">
-      <div class="section-header-centered">
+      <div class="section-header-centered" data-reveal>
         <div class="section-pill-tag">
           <span class="tag-number">01</span>
           <span class="tag-dash">—</span>
@@ -182,7 +185,7 @@
 
       <div class="tools-grid">
         <!-- Tool 1: Adobe InDesign -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="1">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/adobe_indesign.svg" alt="Adobe InDesign Logo" width="34" height="34" loading="lazy">
@@ -196,7 +199,7 @@
         </div>
 
         <!-- Tool 2: Adobe Illustrator -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="2">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/adobe_illustrator.svg" alt="Adobe Illustrator Logo" width="34" height="34" loading="lazy">
@@ -210,7 +213,7 @@
         </div>
 
         <!-- Tool 3: Adobe Express -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="3">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/adobe_express.svg" alt="Adobe Express Logo" width="34" height="34" loading="lazy">
@@ -224,7 +227,7 @@
         </div>
 
         <!-- Tool 4: Adobe Photoshop -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="4">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/adobe_photoshop.svg" alt="Adobe Photoshop Logo" width="34" height="34" loading="lazy">
@@ -238,7 +241,7 @@
         </div>
 
         <!-- Tool 5: Autodesk AutoCAD -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="1">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/autocad_mark.svg" alt="Autodesk AutoCAD Logo" width="34" height="34" loading="lazy">
@@ -252,7 +255,7 @@
         </div>
 
         <!-- Tool 6: Procreate -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="2">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/procreate.png" alt="Procreate Logo" width="34" height="34" loading="lazy">
@@ -266,7 +269,7 @@
         </div>
 
         <!-- Tool 7: Canva -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="3">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/canva.svg" alt="Canva Logo" width="34" height="34" loading="lazy">
@@ -280,7 +283,7 @@
         </div>
 
         <!-- Tool 8: Rhinoceros 3D (Rhino) -->
-        <div class="tool-card">
+        <div class="tool-card" data-reveal data-reveal-delay="4">
           <div class="tool-top-row">
             <div class="tool-icon-box">
               <img src="assets/icons/rhinoceros_3d_gold.svg" alt="Rhinoceros 3D Logo" width="34" height="34" loading="lazy">
@@ -309,9 +312,9 @@
 
       <div class="about-grid">
         <!-- Left: Authentic Portrait Card -->
-        <div class="portrait-card">
+        <div class="portrait-card" data-reveal="left">
           <div class="portrait-media">
-            <img src="assets/extracted_images/p02_img03.jpeg" alt="Soumi Mukherjee Portrait">
+            <img src="assets/extracted_images/soumi_portrait_editorial.jpg" alt="Soumi Mukherjee Portrait">
           </div>
           <div class="portrait-footer">
             <h3 class="portrait-name">Soumi Mukherjee</h3>
@@ -321,7 +324,7 @@
         </div>
 
         <!-- Right: Editorial Narrative -->
-        <div class="about-narrative">
+        <div class="about-narrative" data-reveal="right">
           <p class="about-editorial-text">
             I am a jewellery design student with a strong inclination toward creating pieces that balance <span class="gold-text">aesthetic elegance with thoughtful functionality</span>.
           </p>
@@ -342,7 +345,7 @@
             </div>
             <div class="stat-card">
               <span class="stat-num">21</span>
-              <span class="stat-label">Jury Spreads</span>
+              <span class="stat-label">Design Spreads</span>
             </div>
             <div class="stat-card">
               <span class="stat-num">NIFT</span>

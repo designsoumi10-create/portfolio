@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     let currentPercent = 0;
     const targetPercent = 100;
-    const totalDuration = 1000; // ms
+    const totalDuration = 1000; // ms snappy counter matching Ritam Roy
     const intervalTime = 16;
     const increment = targetPercent / (totalDuration / intervalTime);
-    const fullCircumference = 251.32; // 2 * PI * 40
+    const fullCircumference = 251.2; // 2 * PI * 40
 
     const countTimer = setInterval(() => {
       currentPercent += increment;
@@ -295,6 +295,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+  });
+
+  // =========================================================================
+  // 7. FLUID SCROLL REVEAL OBSERVER (MATCHING RITAM ROY)
+  // =========================================================================
+  const revealElements = document.querySelectorAll(
+    '[data-reveal], .tools-section, .about-section, .expertise-section, .collections-section, .contact-section, .spread-reader-section, .tool-card, .project-card, .portrait-card'
+  );
+
+  const observerOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach((el) => {
+    revealObserver.observe(el);
   });
 
 });

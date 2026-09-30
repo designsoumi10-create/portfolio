@@ -40,6 +40,7 @@
 
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-snappy: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -88,90 +89,103 @@ body.loading-state {
 /* ===================================================================
    1. PRELOADER ANIMATION SEQUENCE (EXACT RITAM ROY MATCH)
    =================================================================== */
+/* ---------- PRELOADER ANIMATION (EXACT RITAM ROY SEQUENCE) ---------- */
 .preloader {
   position: fixed;
   inset: 0;
-  background: #08080A;
+  background-color: #050505;
   z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.6s ease;
 }
 
 .preloader.completed {
   transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+  display: none !important;
 }
 
 .preloader-content {
+  text-align: center;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-}
-
-.preloader-spinner-wrap {
-  width: 140px;
-  height: 140px;
-  position: relative;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.preloader-spinner-wrap.hide {
-  opacity: 0;
-  transform: scale(0.85);
-}
-
-.preloader-arc {
-  position: absolute;
-  inset: 0;
-  transform: rotate(-90deg);
-}
-
-.preloader-arc-bg {
-  stroke: rgba(255, 255, 255, 0.08);
-}
-
-.preloader-arc-progress {
-  stroke: var(--gold-primary);
-  stroke-dasharray: 251.32;
-  stroke-dashoffset: 251.32;
-  transition: stroke-dashoffset 0.1s linear;
-  filter: drop-shadow(0 0 8px var(--gold-primary));
 }
 
 .preloader-counter {
-  font-family: var(--font-mono);
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 12vw, 8.5rem);
+  font-weight: 800;
   color: var(--gold-light);
-  transition: opacity 0.3s ease;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .preloader-counter.hide {
   opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  display: none;
+}
+
+.preloader-spinner-wrap {
+  width: 60px;
+  height: 60px;
+  margin-top: 15px;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.preloader-spinner-wrap.hide {
+  opacity: 0;
+  display: none;
+}
+
+.preloader-arc {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.preloader-arc-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 4;
+}
+
+.preloader-arc-progress {
+  fill: none;
+  stroke: var(--gold-primary);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 251.2;
+  stroke-dashoffset: 251.2;
+  transition: stroke-dashoffset 0.1s linear;
 }
 
 .preloader-greeting {
-  position: absolute;
-  font-family: var(--font-script);
-  font-size: 3.8rem;
-  color: var(--gold-primary);
+  display: none;
   opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-  white-space: nowrap;
-  pointer-events: none;
-  text-shadow: 0 0 25px var(--gold-glow);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(4rem, 10vw, 7.5rem);
+  color: var(--gold-light);
+  letter-spacing: 0.02em;
+  transform: scale(0.9);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .preloader-greeting.show {
+  display: block;
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 /* ===================================================================
@@ -223,77 +237,133 @@ body.loading-state {
 /* ===================================================================
    3. FULLSCREEN HAMBURGER OVERLAY MENU
    =================================================================== */
+/* ---------- FULLSCREEN OVERLAY MENU (EXACT RITAM ROY MATCH) ---------- */
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(7, 7, 7, 0.98);
-  backdrop-filter: blur(25px);
+  background-color: #070707;
   z-index: 10002;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transform: translateY(-100%);
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease;
 }
 
 .menu-overlay.open {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .menu-close-btn {
   position: absolute;
-  top: 2rem;
-  right: 2.5rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid var(--border-dark);
+  top: clamp(20px, 4vh, 35px);
+  right: clamp(20px, 4vw, 40px);
+  font-size: 2.2rem;
+  color: var(--text-light);
   background: transparent;
-  color: #fff;
-  font-size: 1.6rem;
+  border: none;
   cursor: pointer;
+  transition: transform 0.3s ease, color 0.2s ease;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-fast);
 }
 
 .menu-close-btn:hover {
-  border-color: var(--gold-primary);
-  color: var(--gold-primary);
   transform: rotate(90deg);
+  color: var(--gold-primary);
 }
 
 .menu-content {
+  width: 100%;
+  max-width: 800px;
+  padding: 0 30px;
   text-align: center;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-nav {
-  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(8px, 2.2vh, 18px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .menu-link {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  color: var(--text-light-muted);
-  text-decoration: none;
+  font-size: clamp(1.8rem, 4.4vh, 3.2rem);
+  font-weight: 700;
   letter-spacing: 0.05em;
-  transition: all var(--transition-fast);
+  color: #FFFFFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.25s ease, color 0.25s ease;
   display: inline-block;
+  line-height: 1.15;
 }
 
 .menu-link:hover {
   color: var(--gold-primary);
-  transform: scale(1.05) translateX(12px);
-  text-shadow: 0 0 30px var(--gold-glow);
+  transform: scale(1.05);
+  text-shadow: 0 0 20px var(--gold-glow);
+}
+
+.menu-footer {
+  margin-top: clamp(16px, 3.5vh, 36px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 1.8vh, 18px);
+}
+
+.menu-resume-link {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gold-primary);
+  letter-spacing: 0.1em;
+  padding: 9px 24px;
+  border: 1px solid var(--gold-primary);
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.menu-resume-link:hover {
+  background: var(--gold-primary);
+  color: #000000;
+}
+
+.menu-socials {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-light-muted);
+}
+
+.menu-socials a {
+  color: var(--text-light-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.menu-socials a:hover {
+  color: #FFFFFF;
 }
 
 /* ===================================================================
@@ -784,7 +854,7 @@ body.loading-state {
 }
 
 .portrait-media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: #14171d;
   position: relative;
@@ -794,6 +864,7 @@ body.loading-state {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.6s ease;
 }
 
@@ -1646,3 +1717,40 @@ body.loading-state {
   .site-footer { flex-direction: column; gap: 1.5rem; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ===================================================================
+   15. SCROLL REVEAL SYSTEM (Fluid entrance animations like Ritam Roy)
+   =================================================================== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-40px);
+}
+
+[data-reveal="left"].is-revealed {
+  transform: translateX(0);
+}
+
+[data-reveal="right"] {
+  transform: translateX(40px);
+}
+
+[data-reveal="right"].is-revealed {
+  transform: translateX(0);
+}
+
+[data-reveal-delay="1"] { transition-delay: 0.1s; }
+[data-reveal-delay="2"] { transition-delay: 0.2s; }
+[data-reveal-delay="3"] { transition-delay: 0.3s; }
+[data-reveal-delay="4"] { transition-delay: 0.4s; }
+[data-reveal-delay="5"] { transition-delay: 0.5s; }
